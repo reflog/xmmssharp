@@ -3,18 +3,22 @@
     <Configuration name="Debug" ctype="CombineConfiguration">
       <Entry build="True" name="xmms-sharp" configuration="Debug" />
       <Entry build="True" name="tester" configuration="Debug" />
+      <Entry build="True" name="Packages" configuration="" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="xmms-sharp" configuration="Release" />
       <Entry build="True" name="tester" configuration="Release" />
+      <Entry build="True" name="Packages" configuration="" />
     </Configuration>
   </Configurations>
   <StartMode startupentry="tester" single="True">
     <Execute type="None" entry="xmms-sharp" />
     <Execute type="None" entry="tester" />
+    <Execute type="None" entry="Packages" />
   </StartMode>
   <Entries>
     <Entry filename="./xmms-sharp/xmms-sharp.mdp" />
     <Entry filename="./tester/tester.mdp" />
+    <Entry filename="./Packages.mdse" />
   </Entries>
 </Combine>
