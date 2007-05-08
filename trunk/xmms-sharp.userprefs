@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<UserCombinePreferences filename="/home/reflog/src/xmms-sharp/xmms-sharp.mds">
+<UserCombinePreferences filename="/home/reflog/xmmssharp/xmms-sharp.mds">
   <Files>
     <File filename="./tester/runme.cs" />
     <File filename="./xmms-sharp/XmmsPlaylist.cs" />
@@ -12,11 +12,11 @@
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
       <TreeView>
         <Node expanded="True">
-          <Node name="tester" expanded="True" />
-          <Node name="xmms-sharp" expanded="True">
-            <Node name="SWIG" expanded="True" />
-            <Node name="XmmsResult.cs" expanded="False" selected="True" />
+          <Node name="Packages" expanded="True" />
+          <Node name="tester" expanded="True">
+            <Node name="runme.cs" expanded="False" selected="True" />
           </Node>
+          <Node name="xmms-sharp" expanded="True" />
         </Node>
       </TreeView>
     </ViewMemento>
@@ -39,7 +39,7 @@
   <Properties>
     <Properties>
       <Property key="ActiveConfiguration" value="Debug" />
-      <Property key="ActiveWindow" value="/home/reflog/src/xmms-sharp/xmms-sharp/XmmsResult.cs" />
+      <Property key="ActiveWindow" value="/home/reflog/xmmssharp/tester/runme.cs" />
     </Properties>
   </Properties>
 </UserCombinePreferences>
