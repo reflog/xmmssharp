@@ -25,6 +25,11 @@ public class XmmsResult
     public bool IsValidList(){
         return XmmsClientInterface.xmmsc_result_list_valid (res) == 1;
     }
+    
+    public void ListNext(){
+        XmmsClientInterface.xmmsc_result_list_next(res);
+    }
+    
     public void Wait(){
         XmmsClientInterface.xmmsc_result_wait (res);
     }
@@ -67,10 +72,7 @@ public class XmmsResult
     }
 
 
-    public void ListNext(){
-        XmmsClientInterface.xmmsc_result_list_next (res);
-    }
-
+    
     public bool DictHasKey(string key){
         return XmmsClientInterface.xmmsc_result_get_dict_entry_type (res, key) != xmmsc_result_value_type_t.XMMSC_RESULT_VALUE_TYPE_NONE;
     }

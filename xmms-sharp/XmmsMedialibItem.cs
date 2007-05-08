@@ -2,6 +2,8 @@
 using System;
 using System.Reflection;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+
 namespace xmmssharp
 {
 
@@ -49,8 +51,10 @@ public class XmmsMedialibItem
     public string stopsample = "";
     public string available = "";
 
-
-    public XmmsMedialibItem(XmmsResult res){
+    private XmmsConnection connection;
+    
+    public XmmsMedialibItem(XmmsConnection con, XmmsResult res){
+        connection = con;
         Dictionary<string, object> dict = res.GetDict();
         foreach(string n in XmmsMediaLibEntryProperty.GetNames(typeof(XmmsMediaLibEntryProperty)))
             if (dict.ContainsKey(n)){
@@ -74,5 +78,47 @@ public class XmmsMedialibItem
     public XmmsMedialibItem()
     {
     }
+    
+    public void SetProperty(string key, int val){
+        HandleRef p = SWIGTYPE_p_xmmsc_connection_St.getCPtr(connection.Handle);
+        IntPtr p2 = xmmsc_medialib_entry_property_set_int ( p, id, key, val);
+        SWIGTYPE_p_xmmsc_result_St res = new SWIGTYPE_p_xmmsc_result_St(p2, true);
+        XmmsResult info_res =  new XmmsResult (res);
+        info_res.Wait();
+        if (info_res.IsError()) {
+            throw new XmmsException(info_res.GetError());
+        }   
+    }
+
+    public void SetProperty(string key, string val){
+        HandleRef p = SWIGTYPE_p_xmmsc_connection_St.getCPtr(connection.Handle);
+        IntPtr p2 = xmmsc_medialib_entry_property_set_str ( p, id, key, val);
+        SWIGTYPE_p_xmmsc_result_St res = new SWIGTYPE_p_xmmsc_result_St(p2, true);
+        XmmsResult info_res =  new XmmsResult (res);
+        info_res.Wait();
+        if (info_res.IsError()) {
+            throw new XmmsException(info_res.GetError());
+        }   
+    }
+    
+    public void RemoveProperty(string key){
+        HandleRef p = SWIGTYPE_p_xmmsc_connection_St.getCPtr(connection.Handle);
+        IntPtr p2 = xmmsc_medialib_entry_property_remove ( p, id, key);
+        SWIGTYPE_p_xmmsc_result_St res = new SWIGTYPE_p_xmmsc_result_St(p2, true);
+        XmmsResult info_res =  new XmmsResult (res);
+        info_res.Wait();
+        if (info_res.IsError()) {
+            throw new XmmsException(info_res.GetError());
+        }   
+    }
+    
+  [DllImport("XmmsClientInterface", EntryPoint="xmmsc_medialib_entry_property_set_int")]
+  extern static IntPtr xmmsc_medialib_entry_property_set_int (HandleRef res, int id, string key, int val);
+  [DllImport("XmmsClientInterface", EntryPoint="xmmsc_medialib_entry_property_set_str")]
+  extern static IntPtr xmmsc_medialib_entry_property_set_str (HandleRef res, int id, string key, string val);
+  [DllImport("XmmsClientInterface", EntryPoint="xmmsc_medialib_entry_property_remove")]
+  extern static IntPtr xmmsc_medialib_entry_property_remove (HandleRef res, int id, string key);
+
+    
 }
 }

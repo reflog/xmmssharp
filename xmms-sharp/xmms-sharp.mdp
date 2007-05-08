@@ -2,8 +2,8 @@
   <Configurations active="Debug">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
       <CustomCommands>
-        <Command type="BeforeBuild" command="gcc -I/home/reflog/src/xmms-sharp/xmms-sharp/xmms2src -c -fpic  t_wrap.c -o /home/reflog/src/xmms-sharp/xmms-sharp/bin/Debug/t_wrap.o" />
-        <Command type="AfterBuild" command="gcc -lxmmsclient -shared /home/reflog/src/xmms-sharp/xmms-sharp/bin/Debug/t_wrap.o   -o /home/reflog/src/xmms-sharp/tester/bin/Debug/libXmmsClientInterface.so" />
+        <Command type="BeforeBuild" command="gcc -I/home/reflog/xmmssharp/xmms-sharp/xmms2includes -c -fpic  t_wrap.c -o /home/reflog/xmmssharp/xmms-sharp/bin/Debug/t_wrap.o" />
+        <Command type="BeforeBuild" command="gcc -lxmmsclient -shared /home/reflog/xmmssharp/xmms-sharp/bin/Debug/t_wrap.o   -o /home/reflog/xmmssharp/tester/bin/Debug/libXmmsClientInterface.so" />
       </CustomCommands>
       <Output directory="./bin/Debug" assembly="xmms-sharp" />
       <Build debugmode="True" target="Library" />
@@ -62,6 +62,21 @@
     <File name="./xmms2includes" subtype="Directory" buildaction="Compile" />
     <File name="./xmms2includes/xmmsc" subtype="Directory" buildaction="Compile" />
     <File name="./xmms2includes/xmmsclient" subtype="Directory" buildaction="Compile" />
+    <File name="./xmms2includes/xmmsc/xmmsc_asyncns.h" subtype="Code" buildaction="Nothing" />
+    <File name="./xmms2includes/xmmsclient/xmmsclient.h" subtype="Code" buildaction="Nothing" />
+    <File name="./xmms2includes/xmmsc/xmmsc_idnumbers.h" subtype="Code" buildaction="Nothing" />
+    <File name="./xmms2includes/xmmsc/xmmsc_errorcodes.h" subtype="Code" buildaction="Nothing" />
+    <File name="./xmms2includes/xmmsc/xmmsc_inline.h" subtype="Code" buildaction="Nothing" />
+    <File name="./xmms2includes/xmmsc/xmmsc_sockets.h" subtype="Code" buildaction="Nothing" />
+    <File name="./xmms2includes/xmmsc/xmmsc_stringport.h" subtype="Code" buildaction="Nothing" />
+    <File name="./xmms2includes/xmmsc/xmmsc_stdbool.h" subtype="Code" buildaction="Nothing" />
+    <File name="./xmms2includes/xmmsc/xmmsc_stdint.h" subtype="Code" buildaction="Nothing" />
+    <File name="./xmms2includes/xmmsc/xmmsc_ipc_transport.h" subtype="Code" buildaction="Nothing" />
+    <File name="./xmms2includes/xmmsc/xmmsc_strlist.h" subtype="Code" buildaction="Nothing" />
+    <File name="./xmms2includes/xmmsc/xmmsc_ipc_msg.h" subtype="Code" buildaction="Nothing" />
+    <File name="./xmms2includes/xmmsc/xmmsc_unistd.h" subtype="Code" buildaction="Nothing" />
+    <File name="./xmms2includes/xmmsc/xmmsc_util.h" subtype="Code" buildaction="Nothing" />
+    <File name="./ChangeLog" subtype="Code" buildaction="Nothing" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

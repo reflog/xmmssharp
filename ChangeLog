@@ -1,0 +1,11 @@
+2007-05-08  Eli Yukelzon <reflog@gmail.com> 
+
+	* xmms-sharp/XmmsMedialib.cs: Implemented some more functions
+	* xmms-sharp/XmmsResult.cs: Added list function
+	* xmms-sharp/XmmsMedialibItem.cs: Added property setters
+	* tester/runme.cs: Added medialib calls
+
+2007-05-08  Eli Yukelzon <reflog@gmail.com>
+
+	* XmmsResult.cs: fixed list function
+
