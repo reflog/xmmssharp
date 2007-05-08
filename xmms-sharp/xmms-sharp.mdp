@@ -1,0 +1,70 @@
+<Project name="xmms-sharp" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="DotNetProjectConfiguration">
+      <CustomCommands>
+        <Command type="BeforeBuild" command="gcc -I/home/reflog/src/xmms-sharp/xmms-sharp/xmms2src -c -fpic  t_wrap.c -o /home/reflog/src/xmms-sharp/xmms-sharp/bin/Debug/t_wrap.o" />
+        <Command type="AfterBuild" command="gcc -lxmmsclient -shared /home/reflog/src/xmms-sharp/xmms-sharp/bin/Debug/t_wrap.o   -o /home/reflog/src/xmms-sharp/tester/bin/Debug/libXmmsClientInterface.so" />
+      </CustomCommands>
+      <Output directory="./bin/Debug" assembly="xmms-sharp" />
+      <Build debugmode="True" target="Library" />
+      <Execution runwithwarnings="True" consolepause="False" runtime="MsNet" clr-version="Net_2_0" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+    <Configuration name="Release" ctype="DotNetProjectConfiguration">
+      <Output directory="./bin/Release" assembly="xmms-sharp" />
+      <Build debugmode="False" target="Library" />
+      <Execution runwithwarnings="True" consolepause="False" runtime="MsNet" clr-version="Net_2_0" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="True" unsafecodeallowed="False" generateoverflowchecks="True" generatexmldocumentation="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+  </Configurations>
+  <Contents>
+    <File name="./AssemblyInfo.cs" subtype="Code" buildaction="Compile" />
+    <File name="./SWIG" subtype="Directory" buildaction="Compile" />
+    <File name="./SWIG/SWIGTYPE_p_f_int_p_void__void.cs" subtype="Code" buildaction="Compile" />
+    <File name="./SWIG/SWIGTYPE_p_f_p_q_const__void_enum_xmmsc_result_value_type_t_p_q_const__void_p_q_const__char_p_void__void.cs" subtype="Code" buildaction="Compile" />
+    <File name="./SWIG/SWIGTYPE_p_f_p_q_const__void_enum_xmmsc_result_value_type_t_p_q_const__void_p_void__void.cs" subtype="Code" buildaction="Compile" />
+    <File name="./SWIG/SWIGTYPE_p_f_p_struct_xmmsc_result_St_p_void__void.cs" subtype="Code" buildaction="Compile" />
+    <File name="./SWIG/SWIGTYPE_p_f_p_void__void.cs" subtype="Code" buildaction="Compile" />
+    <File name="./SWIG/SWIGTYPE_p_int.cs" subtype="Code" buildaction="Compile" />
+    <File name="./SWIG/SWIGTYPE_p_int32_t.cs" subtype="Code" buildaction="Compile" />
+    <File name="./SWIG/SWIGTYPE_p_p_char.cs" subtype="Code" buildaction="Compile" />
+    <File name="./SWIG/SWIGTYPE_p_p_unsigned_char.cs" subtype="Code" buildaction="Compile" />
+    <File name="./SWIG/SWIGTYPE_p_uint32_t.cs" subtype="Code" buildaction="Compile" />
+    <File name="./SWIG/SWIGTYPE_p_unsigned_char.cs" subtype="Code" buildaction="Compile" />
+    <File name="./SWIG/SWIGTYPE_p_unsigned_int.cs" subtype="Code" buildaction="Compile" />
+    <File name="./SWIG/SWIGTYPE_p_void.cs" subtype="Code" buildaction="Compile" />
+    <File name="./SWIG/SWIGTYPE_p_xmmsc_connection_St.cs" subtype="Code" buildaction="Compile" />
+    <File name="./SWIG/SWIGTYPE_p_xmmsc_result_St.cs" subtype="Code" buildaction="Compile" />
+    <File name="./SWIG/SWIGTYPE_p_xmms_ipc_msg_t.cs" subtype="Code" buildaction="Compile" />
+    <File name="./SWIG/XmmsClientInterface.cs" subtype="Code" buildaction="Compile" />
+    <File name="./SWIG/XmmsClientInterfacePINVOKE.cs" subtype="Code" buildaction="Compile" />
+    <File name="./SWIG/XmmsClientInterfacePINVOKE.so" subtype="Code" buildaction="Nothing" />
+    <File name="./SWIG/xmmsc_query_attribute_t.cs" subtype="Code" buildaction="Compile" />
+    <File name="./SWIG/xmmsc_result_type_t.cs" subtype="Code" buildaction="Compile" />
+    <File name="./SWIG/xmmsc_result_value_type_t.cs" subtype="Code" buildaction="Compile" />
+    <File name="./SWIG/xmms_ipc_cmds_t.cs" subtype="Code" buildaction="Compile" />
+    <File name="./SWIG/xmms_ipc_objects_t.cs" subtype="Code" buildaction="Compile" />
+    <File name="./SWIG/xmms_ipc_signals_t.cs" subtype="Code" buildaction="Compile" />
+    <File name="./SWIG/xmms_mediainfo_reader_status_t.cs" subtype="Code" buildaction="Compile" />
+    <File name="./SWIG/xmms_object_cmd_arg_type_t.cs" subtype="Code" buildaction="Compile" />
+    <File name="./SWIG/xmms_playback_status_t.cs" subtype="Code" buildaction="Compile" />
+    <File name="./SWIG/xmms_playlist_changed_actions_t.cs" subtype="Code" buildaction="Compile" />
+    <File name="./SWIG/xmms_plugin_type_t.cs" subtype="Code" buildaction="Compile" />
+    <File name="./t.i" subtype="Code" buildaction="Nothing" />
+    <File name="./t_wrap.c" subtype="Code" buildaction="Nothing" />
+    <File name="./xmms2src" subtype="Directory" buildaction="Compile" />
+    <File name="./xmms2src/xmmsclient.h" subtype="Code" buildaction="Nothing" />
+    <File name="./xmms2src/xmmsc_idnumbers.h" subtype="Code" buildaction="Nothing" />
+    <File name="./SWIG/XmmsConnection.cs" subtype="Code" buildaction="Compile" />
+    <File name="./XmmsPlaylist.cs" subtype="Code" buildaction="Compile" />
+    <File name="./XmmsException.cs" subtype="Code" buildaction="Compile" />
+    <File name="./XmmsMedialibItem.cs" subtype="Code" buildaction="Compile" />
+    <File name="./XmmsResult.cs" subtype="Code" buildaction="Compile" />
+    <File name="./XmmsMedialib.cs" subtype="Code" buildaction="Compile" />
+    <File name="./XmmsPlayback.cs" subtype="Code" buildaction="Compile" />
+  </Contents>
+  <References>
+    <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  </References>
+  <Deployment.LinuxDeployData scriptName="xmms-sharp" />
+</Project>

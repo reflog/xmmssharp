@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<UserCombinePreferences filename="/home/reflog/src/xmms-sharp/xmms-sharp.mds">
+  <Files>
+    <File filename="./tester/runme.cs" />
+    <File filename="./xmms-sharp/XmmsPlaylist.cs" />
+    <File filename="./xmms-sharp/XmmsMedialib.cs" />
+    <File filename="./xmms-sharp/XmmsPlayback.cs" />
+    <File filename="./xmms-sharp/XmmsMedialibItem.cs" />
+    <File filename="./xmms-sharp/XmmsResult.cs" />
+  </Files>
+  <Views>
+    <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
+      <TreeView>
+        <Node expanded="True">
+          <Node name="tester" expanded="True" />
+          <Node name="xmms-sharp" expanded="True">
+            <Node name="SWIG" expanded="True" />
+            <Node name="XmmsResult.cs" expanded="False" selected="True" />
+          </Node>
+        </Node>
+      </TreeView>
+    </ViewMemento>
+    <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ClassPad">
+      <TreeView>
+        <Node expanded="True" />
+      </TreeView>
+    </ViewMemento>
+    <ViewMemento Id="MonoDevelop.NUnit.TestPad">
+      <TreeView>
+        <Node expanded="False" />
+      </TreeView>
+    </ViewMemento>
+    <ViewMemento Id="MonoQuery.DatabasePad">
+      <TreeView>
+        <Node expanded="False" />
+      </TreeView>
+    </ViewMemento>
+  </Views>
+  <Properties>
+    <Properties>
+      <Property key="ActiveConfiguration" value="Debug" />
+      <Property key="ActiveWindow" value="/home/reflog/src/xmms-sharp/xmms-sharp/XmmsResult.cs" />
+    </Properties>
+  </Properties>
+</UserCombinePreferences>
