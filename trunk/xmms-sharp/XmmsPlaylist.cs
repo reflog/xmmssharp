@@ -110,7 +110,7 @@ public class XmmsPlaylist
             XmmsResult info_res = lib.GetInfo(ui);
 
             if (info_res.DictHasKey ("title")) {
-                lst.Add(new XmmsMedialibItem(info_res));
+                lst.Add(new XmmsMedialibItem(connection, info_res));
             }
             res.ListNext();
         }

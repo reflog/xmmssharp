@@ -13,9 +13,7 @@
       <TreeView>
         <Node expanded="True">
           <Node name="Packages" expanded="True" />
-          <Node name="tester" expanded="True">
-            <Node name="runme.cs" expanded="False" selected="True" />
-          </Node>
+          <Node name="tester" expanded="True" />
           <Node name="xmms-sharp" expanded="True" />
         </Node>
       </TreeView>

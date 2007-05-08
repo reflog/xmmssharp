@@ -16,6 +16,8 @@ using xmmssharp;
         XmmsPlayback pb = new XmmsPlayback(c);
         pb.Pause();
         pb.StatusUpdated += new XmmsPlayback.StatusUpdatedHandler(OnStatusUpdated);
+        XmmsMedialib ml = new XmmsMedialib(c);
+        ml.AddEntry("file:///windows/C/Downloads/Linkin Park/01-Wake.mp3");
         XmmsPlaylist pl = new XmmsPlaylist(c);
         pl.PlayListChanged += new XmmsPlaylist.PlayListChangedHandler (OnPLStatusUpdated);
         pl.Clear();
