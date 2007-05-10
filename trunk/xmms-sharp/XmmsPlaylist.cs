@@ -14,6 +14,8 @@ public class XmmsPlaylist
         connection = conn;
         XmmsResult r = new XmmsResult ( XmmsClientInterface.xmmsc_broadcast_playlist_changed (connection.Handle));
         r.NotifierSet(new XmmsResult.notifier_func(playlist_changed));
+        r = new XmmsResult ( XmmsClientInterface.xmmsc_broadcast_playlist_current_pos (connection.Handle));
+        r.NotifierSet(new XmmsResult.notifier_func(playlist_current_pos));
     }
 
 
@@ -115,9 +117,7 @@ public class XmmsPlaylist
         List<XmmsMedialibItem> lst = new List<XmmsMedialibItem>();
         XmmsResult res =  new XmmsResult (XmmsClientInterface.xmmsc_playlist_list(connection.Handle));
         res.Wait();
-        if (res.IsError()) {
-            throw new XmmsException(res.GetError());
-        }
+        if (res.IsError()) res.RaiseError();
 
         XmmsMedialib lib = new XmmsMedialib(connection);
         while (res.IsValidList()) {
@@ -153,6 +153,20 @@ public class XmmsPlaylist
         XmmsResult info_res =  new XmmsResult (res);
         OnPlayListChanged( info_res, (xmms_playlist_changed_actions_t)info_res.GetDictInt32("type") );
     }
+
+    public event PlayListCurrentPosHandler PlayListCurrentPos;
+    public delegate void PlayListCurrentPosHandler(XmmsResult res, uint pos);
+    public void OnPPlayListCurrentPos(XmmsResult res, uint pos){
+        if(PlayListCurrentPos != null)
+            PlayListCurrentPos(res, pos );
+    }
+
+    void playlist_current_pos (IntPtr res)
+    {
+        XmmsResult info_res =  new XmmsResult (res);
+        OnPlayListCurrentPos( info_res, info_res.GetUint() );
+    }
+
 
     [DllImport("XmmsClientInterface", EntryPoint="xmmsc_playlist_set_next")]
     extern static IntPtr xmmsc_playlist_set_next(HandleRef res, int pos);
