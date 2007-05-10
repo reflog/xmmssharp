@@ -4,9 +4,8 @@
     <File filename="./tester/runme.cs" />
     <File filename="./xmms-sharp/XmmsPlaylist.cs" />
     <File filename="./xmms-sharp/XmmsMedialib.cs" />
-    <File filename="./xmms-sharp/XmmsPlayback.cs" />
-    <File filename="./xmms-sharp/XmmsMedialibItem.cs" />
     <File filename="./xmms-sharp/XmmsResult.cs" />
+    <File filename="xmmssharp Status" />
   </Files>
   <Views>
     <ViewMemento Id="MonoDevelop.Ide.Gui.Pads.ProjectPad">
@@ -14,7 +13,16 @@
         <Node expanded="True">
           <Node name="Packages" expanded="True" />
           <Node name="tester" expanded="True" />
-          <Node name="xmms-sharp" expanded="True" />
+          <Node name="xmms-sharp" expanded="True">
+            <Option id="ShowAllFiles" value="False" />
+            <Option id="ShowVersionControlOverlays" value="True" />
+            <Option id="ShowCodeBehindFiles" value="False" />
+            <Option id="ShowCodeBehindClasses" value="True" />
+            <Node name="Resources" expanded="False">
+              <Option id="ShowAllFiles" value="True" />
+            </Node>
+            <Node name="ChangeLog" expanded="False" selected="True" />
+          </Node>
         </Node>
       </TreeView>
     </ViewMemento>
@@ -37,7 +45,7 @@
   <Properties>
     <Properties>
       <Property key="ActiveConfiguration" value="Debug" />
-      <Property key="ActiveWindow" value="/home/reflog/xmmssharp/tester/runme.cs" />
+      <Property key="ActiveWindow" value="xmmssharp Status" />
     </Properties>
   </Properties>
 </UserCombinePreferences>
