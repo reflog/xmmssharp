@@ -13,7 +13,7 @@ public class XmmsPlaylist
     {
         connection = conn;
         XmmsResult r = new XmmsResult ( XmmsClientInterface.xmmsc_broadcast_playlist_changed (connection.Handle));
-        r.NotifierSet(new XmmsResult.notifier_func(playlist_changed), IntPtr.Zero);
+        r.NotifierSet(new XmmsResult.notifier_func(playlist_changed));
     }
 
 
@@ -148,7 +148,7 @@ public class XmmsPlaylist
             PlayListChanged(res, action );
     }
 
-    void playlist_changed (IntPtr res, IntPtr udata)
+    void playlist_changed (IntPtr res)
     {
         XmmsResult info_res =  new XmmsResult (res);
         OnPlayListChanged( info_res, (xmms_playlist_changed_actions_t)info_res.GetDictInt32("type") );
