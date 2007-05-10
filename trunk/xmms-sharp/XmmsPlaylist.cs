@@ -156,7 +156,7 @@ public class XmmsPlaylist
 
     public event PlayListCurrentPosHandler PlayListCurrentPos;
     public delegate void PlayListCurrentPosHandler(XmmsResult res, uint pos);
-    public void OnPPlayListCurrentPos(XmmsResult res, uint pos){
+    public void OnPlayListCurrentPos(XmmsResult res, uint pos){
         if(PlayListCurrentPos != null)
             PlayListCurrentPos(res, pos );
     }
