@@ -17,6 +17,10 @@ public class XmmsResult
         res = res_;        
     }
     
+    public XmmsResult(IntPtr ptr){
+        res = new SWIGTYPE_p_xmmsc_result_St(ptr, true);
+    }
+    
     override public string ToString(){
         int r = XmmsClientInterface.xmmsc_result_get_type(res);
         return ((xmms_object_cmd_arg_type_t) r).ToString();

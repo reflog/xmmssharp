@@ -52,7 +52,6 @@
     <File name="./SWIG/xmms_plugin_type_t.cs" subtype="Code" buildaction="Compile" />
     <File name="./t.i" subtype="Code" buildaction="Nothing" />
     <File name="./t_wrap.c" subtype="Code" buildaction="Nothing" />
-    <File name="./SWIG/XmmsConnection.cs" subtype="Code" buildaction="Compile" />
     <File name="./XmmsPlaylist.cs" subtype="Code" buildaction="Compile" />
     <File name="./XmmsException.cs" subtype="Code" buildaction="Compile" />
     <File name="./XmmsMedialibItem.cs" subtype="Code" buildaction="Compile" />
@@ -77,6 +76,7 @@
     <File name="./xmms2includes/xmmsc/xmmsc_unistd.h" subtype="Code" buildaction="Nothing" />
     <File name="./xmms2includes/xmmsc/xmmsc_util.h" subtype="Code" buildaction="Nothing" />
     <File name="./ChangeLog" subtype="Code" buildaction="Nothing" />
+    <File name="./XmmsConnection.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

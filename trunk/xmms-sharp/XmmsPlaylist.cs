@@ -5,15 +5,6 @@ using System.Collections.Generic;
 
 namespace xmmssharp
 {
-/*
-
-
- public static SWIGTYPE_p_xmmsc_result_St xmmsc_playlist_sort(SWIGTYPE_p_xmmsc_connection_St c, string arg1) {
- public static SWIGTYPE_p_xmmsc_result_St xmmsc_playlist_set_next(SWIGTYPE_p_xmmsc_connection_St c, SWIGTYPE_p_uint32_t arg1) {
- public static SWIGTYPE_p_xmmsc_result_St xmmsc_playlist_set_next_rel(SWIGTYPE_p_xmmsc_connection_St c, SWIGTYPE_p_int32_t arg1) {
- public static SWIGTYPE_p_xmmsc_result_St xmmsc_playlist_move(SWIGTYPE_p_xmmsc_connection_St c, SWIGTYPE_p_uint32_t arg1, SWIGTYPE_p_uint32_t arg2) {
- 
-*/
 
 public class XmmsPlaylist
 {
@@ -25,6 +16,14 @@ public class XmmsPlaylist
         r.NotifierSet(new XmmsResult.notifier_func(playlist_changed), IntPtr.Zero);
     }
 
+
+    public XmmsResult Sort(string properties){
+        XmmsResult res = new XmmsResult(XmmsClientInterface.xmmsc_playlist_sort(connection.Handle, properties));
+        res.Wait();
+        if (res.IsError()) res.RaiseError();
+        return res;
+    }
+
     public XmmsResult Add(string uri){
         XmmsResult res = new XmmsResult(XmmsClientInterface.xmmsc_playlist_add(connection.Handle, uri));
         res.Wait();
@@ -33,13 +32,11 @@ public class XmmsPlaylist
     }
 
     public XmmsResult Remove(uint idx){
-        HandleRef p = SWIGTYPE_p_xmmsc_connection_St.getCPtr(connection.Handle);
-        IntPtr p2 = xmmsc_playlist_remove(p, idx);
-        SWIGTYPE_p_xmmsc_result_St res = new SWIGTYPE_p_xmmsc_result_St(p2, true);
-        XmmsResult ress = new XmmsResult(res);
+        IntPtr p2 = xmmsc_playlist_remove(connection.HandleRef, idx);
+        XmmsResult ress = new XmmsResult(p2);
         ress.Wait();
         if (ress.IsError()) ress.RaiseError();
-        return ress;        
+        return ress;
     }
 
     public uint CurrentPos(){
@@ -48,7 +45,7 @@ public class XmmsPlaylist
         if (res.IsError()) res.RaiseError();
         return res.GetUint();
     }
-    
+
     public XmmsResult Shuffle(){
         XmmsResult res = new XmmsResult(XmmsClientInterface.xmmsc_playlist_shuffle(connection.Handle));
         res.Wait();
@@ -65,30 +62,49 @@ public class XmmsPlaylist
     }
 
     public XmmsResult Add(uint id){
-        HandleRef p = SWIGTYPE_p_xmmsc_connection_St.getCPtr(connection.Handle);
-        IntPtr p2 = xmmsc_playlist_add_id(p, id);
-        SWIGTYPE_p_xmmsc_result_St res = new SWIGTYPE_p_xmmsc_result_St(p2, true);
-        XmmsResult ress = new XmmsResult(res);
+        IntPtr p2 = xmmsc_playlist_add_id(connection.HandleRef, id);
+        XmmsResult ress = new XmmsResult(p2);
         ress.Wait();
         if (ress.IsError()) ress.RaiseError();
         return ress;
     }
 
     public XmmsResult Insert(string uri, uint pos){
-        HandleRef p = SWIGTYPE_p_xmmsc_connection_St.getCPtr(connection.Handle);
-        IntPtr p2 = xmmsc_playlist_insert(p, pos, uri);
-        SWIGTYPE_p_xmmsc_result_St res = new SWIGTYPE_p_xmmsc_result_St(p2, true);
-        XmmsResult ress = new XmmsResult(res);
+        IntPtr p2 = xmmsc_playlist_insert(connection.HandleRef, pos, uri);
+        XmmsResult ress = new XmmsResult(p2);
         ress.Wait();
         if (ress.IsError()) ress.RaiseError();
         return ress;
     }
 
     public XmmsResult Insert(uint id, uint pos){
-        HandleRef p = SWIGTYPE_p_xmmsc_connection_St.getCPtr(connection.Handle);
-        IntPtr p2 = xmmsc_playlist_insert_id(p, pos, id);
-        SWIGTYPE_p_xmmsc_result_St res = new SWIGTYPE_p_xmmsc_result_St(p2, true);
-        XmmsResult ress = new XmmsResult(res);
+        IntPtr p2 = xmmsc_playlist_insert_id(connection.HandleRef, pos, id);
+        XmmsResult ress = new XmmsResult(p2);
+        ress.Wait();
+        if (ress.IsError()) ress.RaiseError();
+        return ress;
+    }
+
+
+    public XmmsResult Move(int pos1, int pos2){
+        IntPtr p2 = xmmsc_playlist_move(connection.HandleRef, pos1, pos2);
+        XmmsResult ress = new XmmsResult(p2);
+        ress.Wait();
+        if (ress.IsError()) ress.RaiseError();
+        return ress;
+    }
+
+    public XmmsResult SetNextRel(int pos){
+        IntPtr p2 = xmmsc_playlist_set_next_rel(connection.HandleRef, pos);
+        XmmsResult ress = new XmmsResult(p2);
+        ress.Wait();
+        if (ress.IsError()) ress.RaiseError();
+        return ress;
+    }
+
+    public XmmsResult SetNext(int pos){
+        IntPtr p2 = xmmsc_playlist_set_next(connection.HandleRef, pos);
+        XmmsResult ress = new XmmsResult(p2);
         ress.Wait();
         if (ress.IsError()) ress.RaiseError();
         return ress;
@@ -124,23 +140,26 @@ public class XmmsPlaylist
         XmmsResult res = new XmmsResult(XmmsClientInterface.xmmsc_playlist_clear(connection.Handle));
         res.Wait();
     }
-    
-        public event PlayListChangedHandler PlayListChanged;
-        public delegate void PlayListChangedHandler(XmmsResult res, xmms_playlist_changed_actions_t action);
-        public void OnPlayListChanged(XmmsResult res, xmms_playlist_changed_actions_t action){
-            if(PlayListChanged != null)
-                PlayListChanged(res, action );
-        }
-        
-        void playlist_changed (IntPtr res, IntPtr udata)
-        {
-        
-            SWIGTYPE_p_xmmsc_result_St r = new SWIGTYPE_p_xmmsc_result_St(res, true);
-            XmmsResult info_res =  new XmmsResult (r);           
-            OnPlayListChanged( info_res, (xmms_playlist_changed_actions_t)info_res.GetDictInt32("type") );
-            
-        }
 
+    public event PlayListChangedHandler PlayListChanged;
+    public delegate void PlayListChangedHandler(XmmsResult res, xmms_playlist_changed_actions_t action);
+    public void OnPlayListChanged(XmmsResult res, xmms_playlist_changed_actions_t action){
+        if(PlayListChanged != null)
+            PlayListChanged(res, action );
+    }
+
+    void playlist_changed (IntPtr res, IntPtr udata)
+    {
+        XmmsResult info_res =  new XmmsResult (res);
+        OnPlayListChanged( info_res, (xmms_playlist_changed_actions_t)info_res.GetDictInt32("type") );
+    }
+
+    [DllImport("XmmsClientInterface", EntryPoint="xmmsc_playlist_set_next")]
+    extern static IntPtr xmmsc_playlist_set_next(HandleRef res, int pos);
+    [DllImport("XmmsClientInterface", EntryPoint="xmmsc_playlist_set_next_rel")]
+    extern static IntPtr xmmsc_playlist_set_next_rel(HandleRef res, int pos);
+    [DllImport("XmmsClientInterface", EntryPoint="xmmsc_playlist_move")]
+    extern static IntPtr xmmsc_playlist_move(HandleRef res, int pos1, int pos2);
 
     [DllImport("XmmsClientInterface", EntryPoint="xmmsc_playlist_remove")]
     extern static IntPtr xmmsc_playlist_remove(HandleRef res, uint id);

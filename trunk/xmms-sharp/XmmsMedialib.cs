@@ -7,18 +7,12 @@ namespace xmmssharp
 {
 
 /*
- public static SWIGTYPE_p_xmmsc_result_St xmmsc_medialib_playlist_save_current(SWIGTYPE_p_xmmsc_connection_St conn, string name) {
- public static SWIGTYPE_p_xmmsc_result_St xmmsc_medialib_playlist_load(SWIGTYPE_p_xmmsc_connection_St conn, string name) {
- public static SWIGTYPE_p_xmmsc_result_St xmmsc_medialib_get_info(SWIGTYPE_p_xmmsc_connection_St arg0, SWIGTYPE_p_uint32_t arg1) {
+ 
  public static SWIGTYPE_p_xmmsc_result_St xmmsc_medialib_add_to_playlist(SWIGTYPE_p_xmmsc_connection_St c, string query) {
  public static SWIGTYPE_p_xmmsc_result_St xmmsc_medialib_playlists_list(SWIGTYPE_p_xmmsc_connection_St arg0) {
  public static SWIGTYPE_p_xmmsc_result_St xmmsc_medialib_playlist_list(SWIGTYPE_p_xmmsc_connection_St arg0, string playlist) {
- public static SWIGTYPE_p_xmmsc_result_St xmmsc_medialib_playlist_import(SWIGTYPE_p_xmmsc_connection_St conn, string playlist, string url) {
- public static SWIGTYPE_p_xmmsc_result_St xmmsc_medialib_playlist_export(SWIGTYPE_p_xmmsc_connection_St conn, string playlist, string mime) {
- public static SWIGTYPE_p_xmmsc_result_St xmmsc_medialib_playlist_remove(SWIGTYPE_p_xmmsc_connection_St conn, string playlist) {
- public static SWIGTYPE_p_xmmsc_result_St xmmsc_medialib_rehash(SWIGTYPE_p_xmmsc_connection_St conn, SWIGTYPE_p_uint32_t id) {
  public static SWIGTYPE_p_xmmsc_result_St xmmsc_medialib_get_id(SWIGTYPE_p_xmmsc_connection_St conn, string url) {
-
+ 
 */
 enum XmmsMediaLibEntryProperty{
     mime,
@@ -73,17 +67,53 @@ public class XmmsMedialib
     }
 
     public List<XmmsMedialibItem> Query(string sql){
-        List<XmmsMedialibItem> lst = new List<XmmsMedialibItem> (); 
+        List<XmmsMedialibItem> lst = new List<XmmsMedialibItem> ();
         XmmsResult res = new XmmsResult(XmmsClientInterface.xmmsc_medialib_select (connection.Handle, sql));
         res.Wait();
         if (res.IsError()) res.RaiseError();
 
         while (res.IsValidList()) {
-                lst.Add(new XmmsMedialibItem(connection,res));
-                res.ListNext();
+            lst.Add(new XmmsMedialibItem(connection,res));
+            res.ListNext();
         }
-        
+
         return lst;
+    }
+    public XmmsResult PlaylistLoad(string name){
+        XmmsResult res = new XmmsResult(XmmsClientInterface.xmmsc_medialib_playlist_load(connection.Handle, name));
+        res.Wait();
+        if(res.IsError()) res.RaiseError();
+        return res;
+    }
+
+
+    public XmmsResult PlaylistSaveCurrent(string name){
+        XmmsResult res = new XmmsResult(XmmsClientInterface.xmmsc_medialib_playlist_save_current(connection.Handle, name));
+        res.Wait();
+        if(res.IsError()) res.RaiseError();
+        return res;
+    }
+
+
+    public XmmsResult PlaylistImport(string playlist, string url){
+        XmmsResult res = new XmmsResult(XmmsClientInterface.xmmsc_medialib_playlist_import(connection.Handle, playlist, url));
+        res.Wait();
+        if(res.IsError()) res.RaiseError();
+        return res;
+    }
+
+    public XmmsResult PlaylistExport(string playlist, string mime){
+        XmmsResult res = new XmmsResult(XmmsClientInterface.xmmsc_medialib_playlist_export(connection.Handle, playlist, mime));
+        res.Wait();
+        if(res.IsError()) res.RaiseError();
+        return res;
+    }
+
+    public XmmsResult PlaylistRemove(string playlist){
+        XmmsResult res = new XmmsResult(XmmsClientInterface.xmmsc_medialib_playlist_remove(connection.Handle, playlist));
+        res.Wait();
+        if(res.IsError()) res.RaiseError();
+        return res;
     }
 
     public XmmsResult AddEntry(string url)
@@ -111,23 +141,30 @@ public class XmmsMedialib
     }
 
     public XmmsResult RemoveEntry(int id){
-        HandleRef p = SWIGTYPE_p_xmmsc_connection_St.getCPtr(connection.Handle);
-        IntPtr p2 = xmmsc_medialib_remove_entry ( p, id);
-        SWIGTYPE_p_xmmsc_result_St res = new SWIGTYPE_p_xmmsc_result_St(p2, true);
-        XmmsResult info_res =  new XmmsResult (res);
+        IntPtr p2 = xmmsc_medialib_remove_entry ( connection.HandleRef, id);
+        XmmsResult info_res =  new XmmsResult (p2);
         info_res.Wait();
-        if (info_res.IsError()) {
-            throw new XmmsException(info_res.GetError());
-        }
+        if (info_res.IsError()) info_res.RaiseError();
         return info_res;
     }
-    
+
+    public XmmsResult Rehash(){
+        return Rehash(0);
+    }
+
+    public XmmsResult Rehash(int id){
+        IntPtr p2 = xmmsc_medialib_rehash ( connection.HandleRef, id);
+        XmmsResult info_res =  new XmmsResult (p2);
+        info_res.Wait();
+        if (info_res.IsError()) info_res.RaiseError();
+        return info_res;
+    }
+
+
     public XmmsResult GetInfo(uint ui)
     {
-        HandleRef p = SWIGTYPE_p_xmmsc_connection_St.getCPtr(connection.Handle);
-        IntPtr p2 = xmmsc_medialib_get_info ( p, ui);
-        SWIGTYPE_p_xmmsc_result_St res = new SWIGTYPE_p_xmmsc_result_St(p2, true);
-        XmmsResult info_res =  new XmmsResult (res);
+        IntPtr p2 = xmmsc_medialib_get_info ( connection.HandleRef, ui);
+        XmmsResult info_res =  new XmmsResult (p2);
         info_res.Wait();
         if (info_res.IsError()) {
             throw new XmmsException(info_res.GetError());
@@ -139,6 +176,8 @@ public class XmmsMedialib
     extern static IntPtr xmmsc_medialib_get_info (HandleRef res, uint user_data);
     [DllImport("XmmsClientInterface", EntryPoint="xmmsc_medialib_remove_entry")]
     extern static IntPtr xmmsc_medialib_remove_entry (HandleRef res, int id);
+    [DllImport("XmmsClientInterface", EntryPoint="xmmsc_medialib_rehash")]
+    extern static IntPtr xmmsc_medialib_rehash (HandleRef res, int id);
 
 }
 }
