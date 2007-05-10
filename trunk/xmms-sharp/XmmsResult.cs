@@ -75,6 +75,15 @@ public class XmmsResult
         return s.ToString();
     }
 
+    public string GetString(){
+
+        StringBuilder s= new StringBuilder(1024);
+        if(xmmsc_result_get_str(res.swigCPtr, s) == 0){
+            throw new XmmsException("Broken Result");
+        }
+        return s.ToString();
+    }
+
 
     
     public bool DictHasKey(string key){
@@ -140,11 +149,11 @@ public class XmmsResult
         throw new XmmsException(GetError());
     }
 
-    public void NotifierSet(notifier_func func, IntPtr data){    
-      xmmsc_result_notifier_set (res.swigCPtr , func, data);
+    public void NotifierSet(notifier_func func){    
+      xmmsc_result_notifier_set (res.swigCPtr , func, IntPtr.Zero);
     }
     
-    public delegate void notifier_func (IntPtr res, IntPtr udata);
+    public delegate void notifier_func (IntPtr res);
     [DllImport("XmmsClientInterface", EntryPoint="xmmsc_result_notifier_set")]
     extern static void xmmsc_result_notifier_set (HandleRef res, notifier_func f, IntPtr user_data);    
     [DllImport("XmmsClientInterface", EntryPoint="xmmsc_result_dict_foreach")]
@@ -157,6 +166,8 @@ public class XmmsResult
     extern static int xmmsc_result_get_dict_entry_int32 (HandleRef info_res, string  key, out int outi);
     [DllImport("XmmsClientInterface", EntryPoint="xmmsc_result_get_uint")]
     extern static int xmmsc_result_get_uint (HandleRef res, out uint user_data);
+    [DllImport("XmmsClientInterface", EntryPoint="xmmsc_result_get_str")]
+    extern static int xmmsc_result_get_str (HandleRef res, StringBuilder user_data);
     [DllImport("XmmsClientInterface", EntryPoint="xmmsc_entry_format")]
     extern static void xmmsc_entry_format(StringBuilder s , int i , string s2, HandleRef res);
 
