@@ -33,6 +33,11 @@ public class XmmsResult
     public void ListNext(){
         XmmsClientInterface.xmmsc_result_list_next(res);
     }
+
+    public void ListFirst(){
+        XmmsClientInterface.xmmsc_result_list_first(res);
+    }
+
     
     public void Wait(){
         XmmsClientInterface.xmmsc_result_wait (res);

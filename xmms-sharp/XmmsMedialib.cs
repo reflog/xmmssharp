@@ -64,6 +64,10 @@ public class XmmsMedialib
     public XmmsMedialib(XmmsConnection conn)
     {
         connection = conn;
+        XmmsResult r = new XmmsResult ( XmmsClientInterface.xmmsc_broadcast_medialib_playlist_loaded (connection.Handle));
+        r.NotifierSet(new XmmsResult.notifier_func(playlist_loaded));
+        r = new XmmsResult ( XmmsClientInterface.xmmsc_broadcast_medialib_entry_added (connection.Handle));
+        r.NotifierSet(new XmmsResult.notifier_func(entry_added));
     }
 
     public List<XmmsMedialibItem> Query(string sql){
@@ -171,6 +175,35 @@ public class XmmsMedialib
         }
         return info_res;
     }
+
+    public event EntryAddedHandler EntryAdded;
+    public delegate void EntryAddedHandler(XmmsResult res, object data);
+    public void OnEntryAdded(XmmsResult res, object data){
+        if(EntryAdded != null)
+            EntryAdded(res, data );
+    }
+
+    void entry_added (IntPtr res)
+    {
+        XmmsResult info_res =  new XmmsResult (res);
+        //TODO: fix me up
+        OnEntryAdded( info_res, info_res);
+    }
+
+    public event PlayListLoadedHandler PlayListLoaded;
+    public delegate void PlayListLoadedHandler(XmmsResult res, object data);
+    public void OnPlayListLoaded(XmmsResult res, object data){
+        if(PlayListLoaded != null)
+            PlayListLoaded(res, data );
+    }
+
+    void playlist_loaded (IntPtr res)
+    {
+    // TODO: fix this
+        XmmsResult info_res =  new XmmsResult (res);
+        OnPlayListLoaded( info_res, info_res);
+    }
+
 
     [DllImport("XmmsClientInterface", EntryPoint="xmmsc_medialib_get_info")]
     extern static IntPtr xmmsc_medialib_get_info (HandleRef res, uint user_data);
