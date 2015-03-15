@@ -1,0 +1,1 @@
+Client library for accessing XMMS2 APIs from C#
